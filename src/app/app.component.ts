@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Calendar } from '@fullcalendar/core';
+import { Component, OnInit } from '@angular/core';
+import { OptionsInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
@@ -9,11 +9,12 @@ import interactionPlugin from '@fullcalendar/interaction';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @ViewChild('calendar') el: ElementRef;
+  options: OptionsInput;
+
   ngOnInit() {
     const dateObj = new Date();
     const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
-    const calendar = new Calendar(this.el.nativeElement, {
+    this.options = {
       editable: true,
       events: [{
         title: 'Long Event',
@@ -21,8 +22,9 @@ export class AppComponent implements OnInit {
         end: yearMonth + '-10'
       }],
       plugins: [ dayGridPlugin, interactionPlugin ]
-    });
-    calendar.render();
+    };
   }
-
+  eventClick(model) {
+    console.log(model);
+  }
 }

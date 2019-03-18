@@ -1,4 +1,2 @@
-<div #calendar>
-
-</div>
+<app-calendar [options]="options" *ngIf="options" (eventClick)="eventClick($event)"></app-calendar>
 <router-outlet></router-outlet>
